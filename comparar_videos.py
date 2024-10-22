@@ -77,8 +77,42 @@ def plot_results(results):
     ssim_values = [r[2] for r in results]
     bitrate_values = [r[3] for r in results]
     file_size_values = [r[4] for r in results]
+    
+    # cria uma unica imagem png com os graficos
+    fig, axs = plt.subplots(4, 1, figsize=(10, 24))
 
     # Gráfico PSNR
+    axs[0].bar(codecs, psnr_values, color='blue')
+    axs[0].set_title('Comparação de PSNR')
+    axs[0].set_xlabel('Codec')
+    axs[0].set_ylabel('PSNR')
+
+    # Gráfico SSIM
+    axs[1].bar(codecs, ssim_values, color='green')
+    axs[1].set_title('Comparação de SSIM')
+    axs[1].set_xlabel('Codec')
+    axs[1].set_ylabel('SSIM')
+
+    # Gráfico Taxa de Bits
+    axs[2].bar(codecs, bitrate_values, color='orange')
+    axs[2].set_title('Comparação de Taxa de Bits')
+    axs[2].set_xlabel('Codec')
+    axs[2].set_ylabel('Taxa de Bits (bps)')
+
+    # Gráfico Tamanho do Arquivo
+    axs[3].bar(codecs, file_size_values, color='red')
+    axs[3].set_title('Comparação de Tamanho de Arquivo')
+    axs[3].set_xlabel('Codec')
+    axs[3].set_ylabel('Tamanho do Arquivo (MB)')
+
+    # Ajustar layout para evitar sobreposição
+    plt.tight_layout()
+
+    # Salva a figura em um arquivo PNG
+    plt.savefig('resultados_graficos.png')
+    plt.close()
+
+    """# Gráfico PSNR
     plt.figure(figsize=(10, 6))
     plt.bar(codecs, psnr_values, color='blue')
     plt.title('Comparação de PSNR')
@@ -108,7 +142,7 @@ def plot_results(results):
     plt.title('Comparação de Tamanho de Arquivo')
     plt.xlabel('Codec')
     plt.ylabel('Tamanho do Arquivo (MB)')
-    plt.show()
+    plt.show()"""
 
 def main():
     input_file = "video.mp4"  # Substitua pelo caminho do seu vídeo
