@@ -47,7 +47,7 @@ def convert_video(input_file, output_file, codec):
         'ffmpeg', '-i', input_file, '-c:v', codec, '-crf', '23', output_file
     ]
     # Inicia o processo de conversão
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
 
     # Monitora o uso de CPU enquanto o processo está ativo
     cpu_usage = monitor_resources(process)
@@ -209,7 +209,11 @@ def main():
     input_videos = ["video1.mp4", "video2.mp4", "video3.mp4"]  # Lista de vídeos de entrada
     codecs = ['libx264', 'libx265', 'vp9']  # Codecs de vídeo a serem testados
 
+
+
     for input_file in input_videos:
+        print("Arquivo de entrada:", os.path.abspath(input_file))
+        
         # Cria uma pasta específica para os resultados de cada vídeo
         video_name = os.path.splitext(os.path.basename(input_file))[0]
         output_folder = os.path.join("resultados", video_name)
